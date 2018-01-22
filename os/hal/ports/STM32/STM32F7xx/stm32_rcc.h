@@ -281,6 +281,27 @@
 #define rccResetADC1() rccResetAPB2(RCC_APB2RSTR_ADC1RST)
 
 /**
+ * @name    QUADSPI peripherals specific RCC operations
+ * @{
+ */
+/**
+ * @brief   Enables the QUADSPI1 peripheral clock.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define rccEnableQUADSPI1(lp) rccEnableAHB3(RCC_AHB3ENR_QSPIEN, lp)
+
+/**
+ * @brief   Disables the QUADSPI1 peripheral clock.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define rccDisableQUADSPI1(lp) rccDisableAHB3(RCC_AHB3ENR_QSPIEN, lp)
+/**
  * @brief   Enables the ADC2 peripheral clock.
  *
  * @param[in] lp        low power enable flag

@@ -97,6 +97,9 @@ void halInit(void) {
 #if (HAL_USE_SERIAL == TRUE) || defined(__DOXYGEN__)
   sdInit();
 #endif
+#if (HAL_USE_QSPI == TRUE) || defined(__DOXYGEN__)
+  qspiInit();
+#endif
 #if (HAL_USE_SDC == TRUE) || defined(__DOXYGEN__)
   sdcInit();
 #endif

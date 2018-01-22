@@ -62,6 +62,7 @@
 #include "uart.h"
 #include "usb.h"
 #include "wdg.h"
+#include "hal_qspi.h"
 
 /*
  *  The ST driver is a special case, it is only included if the OSAL is

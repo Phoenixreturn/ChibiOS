@@ -11,6 +11,9 @@ HALSRC := $(CHIBIOS)/os/hal/src/hal.c \
 ifneq ($(findstring HAL_USE_ADC TRUE,$(HALCONF)),)
 HALSRC += $(CHIBIOS)/os/hal/src/adc.c
 endif
+ifneq ($(findstring HAL_USE_QSPI TRUE,$(HALCONF)),)
+HALSRC += $(CHIBIOS)/os/hal/src/hal_qspi.c
+endif
 ifneq ($(findstring HAL_USE_CAN TRUE,$(HALCONF)),)
 HALSRC += $(CHIBIOS)/os/hal/src/can.c
 endif
@@ -74,6 +77,7 @@ HALSRC = $(CHIBIOS)/os/hal/src/hal.c \
          $(CHIBIOS)/os/hal/src/hal_queues.c \
          $(CHIBIOS)/os/hal/src/hal_mmcsd.c \
          $(CHIBIOS)/os/hal/src/adc.c \
+         $(CHIBIOS)/os/hal/src/hal_qspi.c \
          $(CHIBIOS)/os/hal/src/can.c \
          $(CHIBIOS)/os/hal/src/dac.c \
          $(CHIBIOS)/os/hal/src/ext.c \

@@ -27,10 +27,10 @@ MEMORY
 {
     flash       : org = 0x08000000, len = 1M
     flash_itcm  : org = 0x00200000, len = 1M
-    ram0        : org = 0x20010000, len = 256k    /* SRAM1 + SRAM2 */
-    ram1        : org = 0x20010000, len = 240k    /* SRAM1 */
+    ram0        : org = 0x2001B800, len = 210k    /* SRAM1 + SRAM2 */
+    ram1        : org = 0x2001B800, len = 194k    /* SRAM1 */
     ram2        : org = 0x2004C000, len = 16k     /* SRAM2 */
-    ram3        : org = 0x20000000, len = 64k     /* DTCM-RAM */
+    ram3        : org = 0x20000000, len = 110k     /* DTCM-RAM */
     ram4        : org = 0x00000000, len = 16k     /* ITCM-RAM */
     ram5        : org = 0x40024000, len = 4k      /* BCKP SRAM */
     ram6        : org = 0x00000000, len = 0

@@ -12,6 +12,9 @@ endif
 ifneq ($(findstring HAL_USE_CAN TRUE,$(HALCONF)),)
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/STM32/LLD/CANv1/can_lld.c
 endif
+ifneq ($(findstring HAL_USE_QSPI TRUE,$(HALCONF)),)
+PLATFORMSRC += $(CHIBIOS)/os/hal/ports/STM32/LLD/QUADSPIv1/hal_qspi_lld.c
+endif
 ifneq ($(findstring HAL_USE_DAC TRUE,$(HALCONF)),)
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/STM32/LLD/DACv1/dac_lld.c
 endif
@@ -67,6 +70,7 @@ PLATFORMSRC := $(CHIBIOS)/os/hal/ports/common/ARMCMx/nvic.c \
                $(CHIBIOS)/os/hal/ports/STM32/STM32F7xx/ext_lld_isr.c \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/ADCv2/adc_lld.c \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/CANv1/can_lld.c \
+               $(CHIBIOS)/os/hal/ports/STM32/LLD/QUADSPIv1/hal_qspi_lld.c \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/EXTIv1/ext_lld.c \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/DACv1/dac_lld.c \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/DMAv2/stm32_dma.c \
@@ -99,6 +103,7 @@ PLATFORMINC := $(CHIBIOS)/os/hal/ports/common/ARMCMx \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/I2Cv2 \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/MACv1 \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/OTGv1 \
+               $(CHIBIOS)/os/hal/ports/STM32/LLD/QUADSPIv1 \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/RTCv2 \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/SDMMCv1 \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/SPIv2 \
