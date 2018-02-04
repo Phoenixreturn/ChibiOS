@@ -1,22 +1,10 @@
-/*
-    ChibiOS - Copyright (C) 2006..2015 Giovanni Di Sirio
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
-/*
- * **** This file incorporates work covered by the following copyright and ****
- * **** permission notice:                                                 ****
+/**
+ * @file
+ * lwIP Operating System abstraction
  *
+ */
+
+/*
  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
  * All rights reserved.
  *
@@ -48,31 +36,33 @@
  *
  */
 
-#ifndef __CC_H__
-#define __CC_H__
+#include "lwip/opt.h"
 
-#include <hal.h>
-#include <sys/time.h>
+#include "lwip/sys.h"
 
-typedef uint8_t         u8_t;
-typedef int8_t          s8_t;
-typedef uint16_t        u16_t;
-typedef int16_t         s16_t;
-typedef uint32_t        u32_t;
-typedef int32_t         s32_t;
-typedef uint32_t        mem_ptr_t;
+/* Most of the functions defined in sys.h must be implemented in the
+ * architecture-dependent file sys_arch.c */
 
-#define PACK_STRUCT_STRUCT __attribute__((packed))
+#if !NO_SYS
 
-#define LWIP_PLATFORM_DIAG(x)
-#define LWIP_PLATFORM_ASSERT(x) {                                       \
-  osalSysHalt(x);                                                          \
+#ifndef sys_msleep
+/**
+ * Sleep for some ms. Timeouts are NOT processed while sleeping.
+ *
+ * @param ms number of milliseconds to sleep
+ */
+void
+sys_msleep(u32_t ms)
+{
+  if (ms > 0) {
+    sys_sem_t delaysem;
+    err_t err = sys_sem_new(&delaysem, 0);
+    if (err == ERR_OK) {
+      sys_arch_sem_wait(&delaysem, ms);
+      sys_sem_free(&delaysem);
+    }
+  }
 }
+#endif /* sys_msleep */
 
-#ifndef BYTE_ORDER
-#define BYTE_ORDER LITTLE_ENDIAN
-#endif
-
-#define LWIP_PROVIDE_ERRNO
-
-#endif /* __CC_H__ */
+#endif /* !NO_SYS */
